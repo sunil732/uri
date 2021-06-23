@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6ab5cefa-f354-493b-80ca-e9cedde624f7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demo6Flow" doc:id="c6e8b761-6d4d-42e5-8edf-be7ca5b8cab7" >
+		<http:listener doc:name="Listener" doc:id="addeccbc-bb60-4f13-ad3a-00e35b59c1fe" config-ref="HTTP_Listener_config" path="/Urip/{V1}"/>
+		<set-variable value="#[attributes.uriParams.V1]" doc:name="Set Variable" doc:id="1f7d4087-e6f3-4d49-b889-0a7edd07dbec" variableName="V1"/>
+		<set-payload value="#[vars.V1]" doc:name="Set Payload" doc:id="70880732-30db-401c-9af3-462984d6fdf0" />
+		<logger level="INFO" doc:name="Logger" doc:id="a2bc0a83-5236-4f22-b4e3-861a271d99fa" message="#[vars.V1]"/>
+	</flow>
+</mule>
